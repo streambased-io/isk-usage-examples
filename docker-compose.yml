@@ -2,7 +2,6 @@ services:
   spark-iceberg:
     image: tabulario/spark-iceberg
     container_name: spark-iceberg
-    network_mode: host
     build: spark/
     volumes:
       - ./docker_demo/spark/warehouse:/home/iceberg/warehouse
@@ -21,7 +20,6 @@ services:
   trino:
     image: trinodb/trino
     container_name: trino
-    network_mode: host
     ports:
       - 9080:9080
     volumes:
