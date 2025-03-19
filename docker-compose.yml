@@ -1,0 +1,34 @@
+services:
+  spark-iceberg:
+    image: tabulario/spark-iceberg
+    container_name: spark-iceberg
+    network_mode: host
+    build: spark/
+    volumes:
+      - ./docker_demo/spark/warehouse:/home/iceberg/warehouse
+      - ./docker_demo/spark/notebooks:/home/iceberg/notebooks/notebooks
+      - ./docker_demo/spark/spark-defaults.template:/opt/spark/conf/spark-defaults.template
+      - ./docker_demo/spark/entrypoint-wrapper.sh:/entrypoint-wrapper.sh #we need this to expand env vars in spark-defaults.properties before starting actual container start script.
+    ports:
+      - 8888:8888
+      - 8080:8080
+      - 10000:10000
+      - 10001:10001
+    entrypoint: /entrypoint-wrapper.sh
+    env_file:
+      - streambased.env
+
+  trino:
+    image: trinodb/trino
+    container_name: trino
+    network_mode: host
+    ports:
+      - 9080:9080
+    volumes:
+      - "./docker_demo/trino/streambased.properties:/etc/trino/catalog/streambased.properties"
+      - "./docker_demo/trino/post-init.sh:/tmp/post-init.sh"
+      - "./docker_demo/trino/config.properties:/etc/trino/config.properties"
+    command:
+      - "/tmp/post-init.sh"
+    env_file:
+      - streambased.env
