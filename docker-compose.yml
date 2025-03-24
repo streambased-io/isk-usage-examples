@@ -1,8 +1,7 @@
 services:
   spark-iceberg:
-    image: tabulario/spark-iceberg
+    image: tabulario/spark-iceberg:3.5.5_1.8.1
     container_name: spark-iceberg
-    build: spark/
     volumes:
       - ./docker_demo/spark/warehouse:/home/iceberg/warehouse
       - ./docker_demo/spark/notebooks:/home/iceberg/notebooks/notebooks
@@ -18,7 +17,7 @@ services:
       - streambased.env
 
   trino:
-    image: trinodb/trino
+    image: trinodb/trino:474
     container_name: trino
     ports:
       - 9080:9080
