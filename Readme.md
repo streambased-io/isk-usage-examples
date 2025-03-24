@@ -2,11 +2,14 @@
 
 ## Background 
 ISK is an Iceberg compatible metadata catalog purpose built for seamlessly representing data residing in Apache Kafka compatible platforms through Iceberg interface.
-Documentation - [ISK on Streambased](https://beta.streambased.cloud/) //TODO: update link to correct one for ISK docs 
 
 Accessing data through Iceberg requires two parts:
 - Iceberg catalog - for metadata lookup - served by ISK service
 - Compatible storage for actual metadata and data file retrieval - served by SSK service (S3 compatible interface)
+ 
+Learn more about ISK concepts - ISK Service [Documentation](https://docs.streambased.io/streambased-cloud/iceberg-service-for-kafka-i.s.k./).
+
+Note: This quick-start is utilizing ISK service on [Streambased Cloud](https://beta.streambased.cloud/).
 
 ## Content of this example
 The example - docker-compose and configuration files are prepared for starting a single (local) instance of Spark and Trino compute engines.
